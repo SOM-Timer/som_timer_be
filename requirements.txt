@@ -8,3 +8,4 @@ nose-cov
 psycopg2
 six
 flask-testing
+coverage
