@@ -1,4 +1,3 @@
-
 from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
 from application.models.timer import Timer
