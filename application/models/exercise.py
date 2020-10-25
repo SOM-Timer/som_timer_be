@@ -1,10 +1,10 @@
 from application import db
-from enum import Enum, auto
+from enum import Enum
 
 class SomaticCategory(Enum):
-    MOVEMENT = auto()
-    MEDITATION = auto()
-    SOMATIC = auto()
+    MOVEMENT = 1
+    MEDITATION = 2
+    SOMATIC = 3
 
 class Exercise(db.Model):
     __tablename__ = 'exercises'
