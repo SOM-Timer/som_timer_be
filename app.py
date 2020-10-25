@@ -5,7 +5,6 @@ from application.models.timer import Timer
 from flask_sqlalchemy import SQLAlchemy
 import os
 
-
 app = create_app("development")
 db = SQLAlchemy(app)
 

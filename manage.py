@@ -1,9 +1,6 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from application import create_app, db
-from application.models.exercise import Exercise
-from application.models.timer import Timer
-
 
 app = create_app("development")
 migrate = Migrate(app, db)
