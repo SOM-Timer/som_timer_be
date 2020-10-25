@@ -130,3 +130,6 @@ dmypy.json
 
 # Test File
 /application/testing.db
+
+# sandbox
+sandbox
