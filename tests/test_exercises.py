@@ -18,8 +18,8 @@ class TestExercises(unittest.TestCase):
             db.drop_all()
 
     def test_get_all_exercises(self):
-        exercise1 = Exercise(url='https://youtube.com', duration='5:00', category='1')
-        exercise2 = Exercise(url='https://vimeo.com', duration='15:00', category='2')
+        exercise1 = Exercise(url='https://youtube.com', duration='5:00', category='Somatic')
+        exercise2 = Exercise(url='https://vimeo.com', duration='15:00', category='Movement')
         with self.app.app_context():
             db.session.add(exercise1)
             db.session.add(exercise2)
@@ -37,10 +37,10 @@ class TestExercises(unittest.TestCase):
         self.assertEquals(payload['count'], 2)
         self.assertEquals(payload['exercises'][0]['url'], 'https://youtube.com')
         self.assertEquals(payload['exercises'][0]['duration'], '5:00')
-        self.assertEquals(payload['exercises'][0]['category'], '1')
+        self.assertEquals(payload['exercises'][0]['category'], 'Somatic')
         self.assertEquals(payload['exercises'][1]['url'], 'https://vimeo.com')
         self.assertEquals(payload['exercises'][1]['duration'], '15:00')
-        self.assertEquals(payload['exercises'][1]['category'], '2')
+        self.assertEquals(payload['exercises'][1]['category'], 'Movement')
 
     def test_create_exercise(self):
         response = self.test_app.post(
@@ -48,7 +48,7 @@ class TestExercises(unittest.TestCase):
             json={
                 'url': 'https://youtube.com/somatic',
                 'duration': '10:00',
-                'category': '3'
+                'category': 'Meditation'
             },
             follow_redirects=True
         )
@@ -58,7 +58,7 @@ class TestExercises(unittest.TestCase):
         payload = json.loads(response.data)
         self.assertEquals(payload['url'], "https://youtube.com/somatic")
         self.assertEquals(payload['duration'], '10:00')
-        self.assertEquals(payload['category'], '3')
+        self.assertEquals(payload['category'], 'Meditation')
 
 
 if __name__ == "__main__":
