@@ -31,7 +31,7 @@ def create_app(config_name):
     from application.controllers.timers import TimersResource
     from application.controllers.exercises import ExercisesResource
 
-    api.add_resource(TimersResource, '/timers')
-    api.add_resource(ExercisesResource, '/exercises')
+    api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
+    api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
 
     return app

@@ -15,28 +15,28 @@ exercise_list_fields = {
     'exercises': fields.List(fields.Nested(exercise_fields)),
 }
 
-# exercise_post_parser = reqparse.RequestParser()
-# exercise_post_parser.add_argument(
-#     'url',
-#     type=str,
-#     required=True,
-#     location=['json'],
-#     help='url parameter is required'
-# )
-# exercise_post_parser.add_argument(
-#     'duration',
-#     type=str,
-#     required=True,
-#     location=['json'],
-#     help='duration parameter is required'
-# )
-# exersise_post_parser.add_argument(
-#     'category',
-#     type=str,
-#     required=True,
-#     location=['json'],
-#     help='category parameter is required'
-# )
+exercise_post_parser = reqparse.RequestParser()
+exercise_post_parser.add_argument(
+    'url',
+    type=str,
+    required=True,
+    location=['json'],
+    help='url parameter is required'
+)
+exercise_post_parser.add_argument(
+    'duration',
+    type=str,
+    required=True,
+    location=['json'],
+    help='duration parameter is required'
+)
+exercise_post_parser.add_argument(
+    'category',
+    type=str,
+    required=True,
+    location=['json'],
+    help='category parameter is required'
+)
 
 class ExercisesResource(Resource):
     def get(self, exercise_id=None):
