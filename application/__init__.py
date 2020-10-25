@@ -28,10 +28,10 @@ def create_app(config_name):
     api = Api(app)
     api.prefix = '/api'
 
-    from application.controllers.timers import TimerResource
-    from application.controllers.exercises import ExerciseResource
+    from application.controllers.timers import TimersResource
+    from application.controllers.exercises import ExercisesResource
 
-    api.add_resource(TimerResource, '/timers', '/timers/<int:timer_id>')
-    api.add_resource(ExerciseResource, '/exercises', '/exercises/<int:exercise_id>')
+    api.add_resource(TimersResource, '/timers')
+    api.add_resource(ExercisesResource, '/exercises')
 
     return app

@@ -1,13 +1,13 @@
 from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
-from application.models.exercise1 import Exercise
+from application.models.exercise import Exercise
 from application import db
 
 exercise_fields = {
     'id': fields.Integer,
     'url': fields.String,
     'duration': fields.String,
-    'category': fields.Enum
+    'category': fields.String
 }
 
 exercise_list_fields = {
@@ -15,28 +15,28 @@ exercise_list_fields = {
     'exercises': fields.List(fields.Nested(exercise_fields)),
 }
 
-exercise_post_parser = reqparse.RequestParser()
-exercise_post_parser.add_argument(
-    'url',
-    type=str,
-    required=True,
-    location=['json'],
-    help='url parameter is required'
-)
-exercise_post_parser.add_argument(
-    'duration',
-    type=str,
-    required=True,
-    location=['json'],
-    help='duration parameter is required'
-)
-exersise_post_parser.add_argument(
-    'category',
-    type=str,
-    required=True,
-    location=['json'],
-    help='category parameter is required'
-)
+# exercise_post_parser = reqparse.RequestParser()
+# exercise_post_parser.add_argument(
+#     'url',
+#     type=str,
+#     required=True,
+#     location=['json'],
+#     help='url parameter is required'
+# )
+# exercise_post_parser.add_argument(
+#     'duration',
+#     type=str,
+#     required=True,
+#     location=['json'],
+#     help='duration parameter is required'
+# )
+# exersise_post_parser.add_argument(
+#     'category',
+#     type=str,
+#     required=True,
+#     location=['json'],
+#     help='category parameter is required'
+# )
 
 class ExercisesResource(Resource):
     def get(self, exercise_id=None):
