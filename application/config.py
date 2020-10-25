@@ -2,7 +2,7 @@ class Config(object):
     DEBUG = False
     CSRF_ENABLED = False
     SECRET = 'dcfgyhbnjio9uytrfcfr4edfg'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/exercises'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/som_timer'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
