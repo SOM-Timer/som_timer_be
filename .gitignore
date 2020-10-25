@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Test File
+/application/testing.db
+
+# sandbox
+sandbox
