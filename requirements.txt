@@ -9,3 +9,4 @@ psycopg2
 six
 flask-testing
 coverage
+gunicorn
