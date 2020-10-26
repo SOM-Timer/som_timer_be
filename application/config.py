@@ -1,8 +1,10 @@
+import os
+
 class Config(object):
     DEBUG = False
     CSRF_ENABLED = False
-    SECRET = 'dcfgyhbnjio9uytrfcfr4edfg'
-    SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/som_timer'
+    SECRET = os.getenv('SECRET')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 class DevelopmentConfig(Config):
@@ -20,6 +22,7 @@ class TestingConfig(Config):
 class ProductionConfig(Config):
     DEBUG = False
     TESTING = False
+
 
 
 app_config = {
