@@ -2,9 +2,10 @@
 
 ## Endpoints
 
-#### GET '/api/timers/{timer_id}
+#### GET  '/api/timers/{timer_id}
 
 ```
+#RESPONSE
 {
     "id": 1,
     "work_interval": "25:00",
@@ -12,7 +13,7 @@
 }
 ```
 
-#### PUT '/api/timers/{timer_id}
+#### PUT  '/api/timers/{timer_id}
 
 ```
 #REQUEST BODY
