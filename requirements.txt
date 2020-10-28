@@ -5,7 +5,7 @@ Flask-Script
 Flask-Migrate
 nose
 nose-cov
-psycopg2
+psycopg2-binary==2.8.6
 six
 flask-testing
 coverage
