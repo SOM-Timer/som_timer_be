@@ -45,7 +45,8 @@ class RandExercises(Resource):
         category = request.json['category']
         duration = request.json['duration']
 
-        exercise = Exercise.query.filter(Exercise.category == category, Exercise.duration == duration).order_by(func.random()).first()
+        exercise = Exercise.query.filter(Exercise.category == category, Exercise.duration == duration)\
+        .order_by(func.random()).first()
 
         return marshal(exercise, exercise_fields)
 
