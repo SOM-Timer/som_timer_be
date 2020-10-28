@@ -10,3 +10,4 @@ six
 flask-testing
 coverage
 gunicorn
+flask_cors
