@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
 from application.models.exercise import Exercise
 from application import db
+import random
 
 exercise_fields = {
     'id': fields.Integer,
@@ -37,6 +38,14 @@ exercise_post_parser.add_argument(
     location=['json'],
     help='category parameter is required'
 )
+
+class RandExercises(Resource):
+    def get(self):
+        category = request.args.get('category')
+        duration = request.args.get('duration')
+
+        exercises = db.session.query(Exercise).filter(Exercise.category==category, Exercise.duration==duration).all()
+        return marshal(random.choice(exercises), exercise_fields)
 
 class ExercisesResource(Resource):
     def get(self, exercise_id=None):
