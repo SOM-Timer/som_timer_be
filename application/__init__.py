@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+from flask_cors import CORS, cross_origin
 from flask_restful import Api
 from werkzeug.exceptions import HTTPException
 from werkzeug.exceptions import default_exceptions
@@ -9,6 +10,7 @@ db = SQLAlchemy()
 
 def create_app(config_name):
     app = Flask(__name__)
+    CORS(app)
 
     @app.errorhandler(Exception)
     def handle_error(e):
