@@ -42,13 +42,19 @@ class TestExercises(unittest.TestCase):
         self.assertEquals(payload['exercises'][1]['duration'], '15:00')
         self.assertEquals(payload['exercises'][1]['category'], 'SomaticCategory.MOVEMENT')
 
-    def test_create_exercise(self):
-        response = self.test_app.post(
-            '/api/exercises',
+    def test_find_random_exercise(self):
+        exercise1 = Exercise(url='https://youtube.com', duration='5:00', category='SOMATIC')
+        exercise2 = Exercise(url='https://vimeo.com', duration='5:00', category='SOMATIC')
+        with self.app.app_context():
+            db.session.add(exercise1)
+            db.session.add(exercise2)
+            db.session.commit()
+
+        response = self.test_app.get(
+            '/api/rand_exercise',
             json={
-                'url': 'https://youtube.com/somatic',
-                'duration': '10:00',
-                'category': 'MEDITATION'
+                'duration': '5:00',
+                'category': 'SOMATIC'
             },
             follow_redirects=True
         )
@@ -56,9 +62,8 @@ class TestExercises(unittest.TestCase):
         # Assert response is 200 OK.
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
-        self.assertEquals(payload['url'], "https://youtube.com/somatic")
-        self.assertEquals(payload['duration'], '10:00')
-        self.assertEquals(payload['category'], 'SomaticCategory.MEDITATION')
+        self.assertEquals(payload['duration'], '5:00')
+        self.assertEquals(payload['category'], 'SomaticCategory.SOMATIC')
 
 
 if __name__ == "__main__":
