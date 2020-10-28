@@ -29,3 +29,23 @@
     "rest_interval": "7:00"
 }
 ```
+
+#### GET  '/api/rand_exercises'
+
+```
+#REQUEST BODY
+duration options are 5:00, 7:00, 10:00
+category options are SOMATIC, MOVEMENT, MEDITATION
+{
+    "duration": "5:00",
+    "category": "SOMATIC"
+}
+
+#RESPONSE BODY
+{
+    "id": 21,
+    "url": "http://www.youtube.com/superrelaxinvibes",
+    "duration": "5:00",
+    "category": "SOMATIC"
+}
+```
