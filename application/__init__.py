@@ -33,14 +33,6 @@ def create_app(config_name):
     from application.controllers.timers import TimersResource
     from application.controllers.exercises import ExercisesResource, RandExercises
 
-    # @api.route("/rand_exercise")
-    # def rand_exercise():
-    #     category = request.args.get('category')
-    #     duration = request.args.get('duration')
-    #
-    #     exercises = Exercise.query.filter(Exercise.category==category, Exercise.duration==duration)
-    #     return random.choice(exercises)
-
     api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
     api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
     api.add_resource(RandExercises, '/rand_exercise')
