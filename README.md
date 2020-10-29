@@ -1,4 +1,37 @@
-# som_timer_be
+# Som Timer Backend 
+
+See [Som Timer Frontend](https://github.com/SOM-Timer/som_timer_fe) for more information on general functionality. 
+
+## Overview
+Tech stack: [Python3.9](https://www.python.org/downloads/) on [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/)
+Testing: UnitTest 
+
+Endpoints built out to deliver timer and exercise content to a user in order to deliver a guided interval work/rest experience. 
+
+## Setup 
+```
+clone and setup locally 
+# enter the virtual enviroment 
+$ . venv/bin/activate 
+# install requirements 
+$ pip install -r requirements.txt 
+# create and configure database 
+$ createdb som_timer 
+$ export DATABASE_URL=postgresql://localhost:5432/som_timer
+# migrate database 
+$ python manage.py db init
+$ python manage.py db migrate 
+$ python manage.py db upgrade 
+# seed database 
+$ flask db_seed 
+```
+
+#### Running the app:
+Command: 
+``` 
+$ python run.py 
+```
+Port: `http://localhost:5000` </br>
 
 ## Endpoints
 
