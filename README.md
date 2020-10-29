@@ -85,7 +85,7 @@ $ coverage report -m
 }
 ```
 
-#### GET  '/api/rand_exercises'
+#### GET  '/api/rand_exercise'
 
 ```
 #REQUEST BODY
