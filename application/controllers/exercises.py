@@ -42,10 +42,12 @@ exercise_post_parser.add_argument(
 
 class RandExercises(Resource):
     def get(self):
-        category = request.json['category']
-        duration = request.json['duration']
+        parser = reqparse.RequestParser()
+        parser.add_argument('duration', required=True, help="Duration cannot be blank!")
+        parser.add_argument('category', required=True, help="Category cannot be blank!")
+        args = parser.parse_args()
 
-        exercise = Exercise.query.filter(Exercise.category == category, Exercise.duration == duration)\
+        exercise = Exercise.query.filter(Exercise.category == args['category'], Exercise.duration == args['duration'])\
         .order_by(func.random()).first()
 
         return marshal(exercise, exercise_fields)
