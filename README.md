@@ -1,6 +1,6 @@
 # Som Timer Backend 
 
-See [Som Timer Frontend](https://github.com/SOM-Timer/som_timer_fe) for more information on general functionality. 
+See [Som Timer Frontend](https://github.com/SOM-Timer/som_timer_fe) for more information!
 
 ## Overview:
 Tech stack: [Python3.9](https://www.python.org/downloads/) on [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/)</br>
@@ -21,7 +21,7 @@ Functionality: timer and exercise endpoints built to deliver a guided interval w
 
 ## Setup:
 ```
-clone and setup locally 
+    clone and setup locally 
 # enter the virtual enviroment 
     $ . venv/bin/activate 
 # install requirements 
@@ -116,7 +116,3 @@ category options are SOMATIC, MOVEMENT, MEDITATION
 [Dorion](https://github.com/sciencefixion) </br>
 [Chandler Hulstrom](https://github.com/Chulstro) </br>
 [Sienna Kopf](https://github.com/sienna-kopf)
-
-
-
-
