@@ -89,12 +89,9 @@ $ coverage report -m
 
 ```
 #REQUEST BODY
-duration options are 5:00, 7:00, 10:00
-category options are SOMATIC, MOVEMENT, MEDITATION
-{
-    "duration": "5:00",
-    "category": "SOMATIC"
-}
+query params are required
+duration = 5:00,7:00, 10:00
+category = SOMATIC, MOVEMENT, MEDITATION
 
 #RESPONSE BODY
 {
