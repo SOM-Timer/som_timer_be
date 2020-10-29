@@ -88,10 +88,11 @@ $ coverage report -m
 #### GET  '/api/rand_exercise'
 
 ```
-#REQUEST BODY
-query params are required
-duration = 5:00,7:00, 10:00
-category = SOMATIC, MOVEMENT, MEDITATION
+#QUERY PARAMS
+* Required
+
+* duration = 5:00,7:00, 10:00
+* category = SOMATIC, MOVEMENT, MEDITATION
 
 #RESPONSE BODY
 {
