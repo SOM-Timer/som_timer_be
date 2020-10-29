@@ -23,18 +23,18 @@ Functionality: timer and exercise endpoints built to deliver a guided interval w
 ```
 clone and setup locally 
 # enter the virtual enviroment 
-$ . venv/bin/activate 
+    $ . venv/bin/activate 
 # install requirements 
-$ pip install -r requirements.txt 
+    $ pip install -r requirements.txt 
 # create and configure database 
-$ createdb som_timer 
-$ export DATABASE_URL=postgresql://localhost:5432/som_timer
+    $ createdb som_timer 
+    $ export DATABASE_URL=postgresql://localhost:5432/som_timer
 # migrate database 
-$ python manage.py db init
-$ python manage.py db migrate 
-$ python manage.py db upgrade 
+    $ python manage.py db init
+    $ python manage.py db migrate 
+    $ python manage.py db upgrade 
 # seed database 
-$ flask db_seed 
+    $ flask db_seed 
 ```
 
 #### Running the app:
