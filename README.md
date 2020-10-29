@@ -90,6 +90,7 @@ $ coverage report -m
 ```
 #QUERY PARAMS
 * Required
+EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 
 * duration = 5:00, 7:00, 10:00
 * category = SOMATIC, MOVEMENT, MEDITATION
