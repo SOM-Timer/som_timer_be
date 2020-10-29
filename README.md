@@ -2,13 +2,24 @@
 
 See [Som Timer Frontend](https://github.com/SOM-Timer/som_timer_fe) for more information on general functionality. 
 
-## Overview
-Tech stack: [Python3.9](https://www.python.org/downloads/) on [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/)
-Testing: UnitTest 
+## Overview:
+Tech stack: [Python3.9](https://www.python.org/downloads/) on [Flask](https://flask.palletsprojects.com/en/1.1.x/installation/)</br>
+Testing: UnitTest </br>
+Functionality: timer and exercise endpoints built to deliver a guided interval work/rest experience.  </br>
 
-Endpoints built out to deliver timer and exercise content to a user in order to deliver a guided interval work/rest experience. 
+## Learning Goals: 
+- Ultimately, demonstrate knowledge you’ve gained throughout Turing
+- Use an agile process to turn well defined requirements into deployed and production ready software
+- Gain experience dividing applications into components and domains of responsibilities to facilitate multi-developer teams. Service oriented architecture concepts and patterns are highly encouraged.
+- Explore and implement new concepts, patterns, or libraries that have not been explicitly taught while at Turing
+- Practice an advanced, professional git workflow (see whole-team expectations)
+- Gain more experience using continuous integration tools to build and automate the deployment of features in various environments
+- Build applications that execute in development, test, CI, and production environments
+- Focus on communication between front-end and back-end teams in order to complete and deploy features that have been outlined by the project spec
+- At least 25% test coverage 
+- Successfully implement a new framework (flask) and a new language (python) 
 
-## Setup 
+## Setup:
 ```
 clone and setup locally 
 # enter the virtual enviroment 
@@ -33,7 +44,18 @@ $ python run.py
 ```
 Port: `http://localhost:5000` </br>
 
-## Endpoints
+## Testing: 
+To run tests: 
+```
+$ nosetests
+```
+To run tests and produce a coverage report: 
+```
+$ coverage run --omit 'venv/*' -m nose 
+$ coverage report -m
+```
+
+## Endpoints:
 
 #### GET  '/api/timers/{timer_id}
 
@@ -82,3 +104,19 @@ category options are SOMATIC, MOVEMENT, MEDITATION
     "category": "SOMATIC"
 }
 ```
+
+## Tools:
+- Python3.9 
+- Flask 
+- Unittest 
+- SQLAlchemy 
+- Postgres
+
+## Authors:
+[Dorion](https://github.com/sciencefixion) </br>
+[Chandler Hulstrom](https://github.com/Chulstro) </br>
+[Sienna Kopf](https://github.com/sienna-kopf)
+
+
+
+
