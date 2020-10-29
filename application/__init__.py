@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
-from flask_restful import Api
+from flask_restful import Api, request
 from werkzeug.exceptions import HTTPException
 from werkzeug.exceptions import default_exceptions
 from flask_sqlalchemy import SQLAlchemy
@@ -31,9 +31,10 @@ def create_app(config_name):
     api.prefix = '/api'
 
     from application.controllers.timers import TimersResource
-    from application.controllers.exercises import ExercisesResource
+    from application.controllers.exercises import ExercisesResource, RandExercises
 
     api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
     api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
+    api.add_resource(RandExercises, '/rand_exercise')
 
     return app
