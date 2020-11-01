@@ -110,6 +110,8 @@ EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 - Unittest 
 - SQLAlchemy 
 - Postgres
+- TravisCI 
+- Heroku 
 
 ## Authors:
 [Dorion](https://github.com/sciencefixion) </br>
