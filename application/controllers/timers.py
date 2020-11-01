@@ -6,7 +6,8 @@ from application import db
 timer_fields = {
     'id': fields.Integer,
     'work_interval': fields.String,
-    'rest_interval': fields.String
+    'rest_interval': fields.String,
+    'sound': fields.String
 }
 
 timer_list_fields = {
@@ -29,6 +30,9 @@ class TimersResource(Resource):
 
         if 'rest_interval' in request.json:
             timer.rest_interval = request.json['rest_interval']
+
+        if 'sound' in request.json:
+            timer.sound = request.json['sound']
 
         db.session.commit()
         return timer
