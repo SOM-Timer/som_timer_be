@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SomTimer</title>
+    <link rel= "stylesheet" type= "text/css" href="../static/styles/mainpage.css">
+  </head>
+  <body>
+    <h1>Som Timer Endpoints</h1>
+    <div class="get_one_timer">
+      <h3>GET  '/api/timers/{timer_id}</h3>
+        <p class="sub_header">Response:</p>
+        <pre>
+          <p class="code_block">
+            {
+              "id": 1,
+              "work_interval": "25:00",
+              "rest_interval": "5:00"
+              "sound": "chordCliff"
+            }
+          </p>
+        </pre>
+    </div>
+    <div class="update_timer">
+      <h3>PUT  '/api/timers/{timer_id}</h3>
+      <p class="sub_header">Request Body:</p>
+        <pre>
+          <p class="code_block">
+            {
+              "work_interval": "30:00",
+              "rest_interval": "7:00",
+              "sound": "gong"
+            }
+          </p>
+        </pre>
+      <p class="sub_header">Response:</p>
+        <pre>
+          <p class="code_block">
+            {
+              "id": 1,
+              "work_interval": "30:00",
+              "rest_interval": "7:00",
+              "sound": "gong"
+            }
+          </p>
+        </pre>
+    </div>
+
+    <div class="rand_exercise">
+      <h3>GET  '/api/rand_exercise'</h3>
+      <pre>
+          <p class="sub_header">Required Query Params:</p>
+          <p class="code_block">
+            * duration = 5:00, 7:00, 10:00
+            * category = SOMATIC, MOVEMENT, MEDITATION
+          </p>
+          <p class="sub_header">Ex:</p>
+          <p class=code_block>
+            '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
+          </p>
+            <p class="sub_header">Response:</p>
+            <p class="code_block">
+              {
+                "id": 21,
+                "url": "http://www.youtube.com/superrelaxinvibes",
+                "duration": "5:00",
+                "category": "SOMATIC"
+              }
+            </p>
+        </pre>
+      </div>
+  </body>
+</html>
