@@ -25,5 +25,11 @@ class TestDocumentation(unittest.TestCase):
 
         self.assertEquals(response.status, "200 OK")
 
+        html = response.data.decode()
+        assert "Som Timer Endpoints" in html
+        assert "GET  '/api/timers/{timer_id}'" in html
+        assert "PUT  '/api/timers/{timer_id}'" in html
+        assert "GET  '/api/rand_exercise'" in html
+
 if __name__ == "__main__":
     unittest.main()
