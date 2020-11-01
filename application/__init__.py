@@ -41,7 +41,7 @@ def create_app(config_name):
     api.add_resource(RandExercises, '/rand_exercise')
 
     @app.route('/')
-    def hello_world():
+    def root():
         return documentation_html
 
     return app
