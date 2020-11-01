@@ -65,6 +65,7 @@ $ coverage report -m
     "id": 1,
     "work_interval": "25:00",
     "rest_interval": "5:00"
+    "sound": "chordCliff"
 }
 ```
 
@@ -74,14 +75,16 @@ $ coverage report -m
 #REQUEST BODY
 {
     "work_interval": "30:00",
-    "rest_interval": "7:00"
+    "rest_interval": "7:00", 
+    "sound": "gong"
 }
 
 #RESPONSE
 {
     "id": 1,
     "work_interval": "30:00",
-    "rest_interval": "7:00"
+    "rest_interval": "7:00",
+    "sound": "gong"
 }
 ```
 
