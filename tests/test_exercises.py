@@ -25,7 +25,6 @@ class TestExercises(unittest.TestCase):
             db.session.add(exercise2)
             db.session.commit()
 
-        # create a user
         response = self.test_app.get(
             '/api/exercises',
             follow_redirects=True
