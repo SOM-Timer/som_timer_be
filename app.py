@@ -22,13 +22,9 @@ def db_reset():
     for timer in timers:
         Timer.delete(timer)
 
-    rest_sessions = RestSession.query.all()
-    for rest_session in rest_sessions:
-        RestSession.delete(rest_session)
-
-    work_sessions = WorkSession.query.all()
-    for work_session in work_sessions:
-        WorkSession.delete(work_session)
+    rests = Rest.query.all()
+    for rest in rests:
+        Rest.delete(rest)
 
 
 @app.cli.command('db_seed')
