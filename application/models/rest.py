@@ -4,8 +4,8 @@ class Rest(db.Model):
     __tablename__ = 'rests'
 
     id = db.Column(db.Integer, primary_key=True)
-    init_mood = db.Column(db.Integer)
-    end_mood = db.Column(db.Integer)
+    mood_rating_1 = db.Column(db.Integer)
+    mood_rating_2 = db.Column(db.Integer)
     content_selected = db.Column(db.String())
     focus_interval = db.Column(db.String())
     rest_interval = db.Column(db.String())
