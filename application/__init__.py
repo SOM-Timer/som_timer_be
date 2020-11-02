@@ -6,6 +6,9 @@ from werkzeug.exceptions import default_exceptions
 from flask_sqlalchemy import SQLAlchemy
 from application.config import app_config
 
+with open('application/templates/documentation.html', 'r') as f:
+    documentation_html = f.read()
+
 db = SQLAlchemy()
 
 def create_app(config_name):
@@ -36,5 +39,9 @@ def create_app(config_name):
     api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
     api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
     api.add_resource(RandExercises, '/rand_exercise')
+
+    @app.route('/')
+    def root():
+        return documentation_html
 
     return app
