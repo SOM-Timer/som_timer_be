@@ -5,8 +5,8 @@ from application import db
 
 rest_fields = {
     'id': fields.Integer,
-    'init_mood': fields.Integer,
-    'end_mood': fields.Integer,
+    'mood_rating_1': fields.Integer,
+    'mood_rating_2': fields.Integer,
     'content_selected': fields.String,
     'focus_interval': fields.String,
     'rest_interval': fields.String
@@ -19,14 +19,14 @@ rest_list_fields = {
 
 rest_post_parser = reqparse.RequestParser()
 rest_post_parser.add_argument(
-    'init_mood',
+    'mood_rating_1',
     type=int,
     required=True,
     location=['json'],
     help='init mood parameter is required'
 )
 rest_post_parser.add_argument(
-    'end_mood',
+    'mood_rating_2',
     type=int,
     required=True,
     location=['json'],

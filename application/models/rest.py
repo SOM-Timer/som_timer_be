@@ -10,9 +10,9 @@ class Rest(db.Model):
     focus_interval = db.Column(db.String())
     rest_interval = db.Column(db.String())
 
-    def __init__(self, init_mood, end_mood, content_selected, focus_interval, rest_interval):
-        self.init_mood = init_mood
-        self.end_mood = end_mood
+    def __init__(self, mood_rating_1, mood_rating_2, content_selected, focus_interval, rest_interval):
+        self.mood_rating_1 = mood_rating_1
+        self.mood_rating_2 = mood_rating_2
         self.content_selected = content_selected
         self.focus_interval = focus_interval
         self.rest_interval = rest_interval
