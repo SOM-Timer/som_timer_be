@@ -56,6 +56,7 @@ $ coverage report -m
 ```
 
 ## Endpoints:
+### [Published Collection](https://www.postman.com/collections/b46b141361f71503a2dc)
 
 #### GET  '/api/timers/{timer_id}
 
