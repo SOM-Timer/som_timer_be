@@ -45,6 +45,27 @@ class TestRests(unittest.TestCase):
         self.assertEquals(payload['rests'][1]['focus_interval'], '25:00')
         self.assertEquals(payload['rests'][1]['rest_interval'], '7:00')
 
+    def test_update_timer(self):
+
+        response = self.test_app.post(
+            '/api/rests',
+            json={
+                "mood_rating_1": 2,
+                "mood_rating_2": 4,
+                "focus_interval": "30:00",
+                "rest_interval": "7:00",
+                "content_selected": "MOVEMENT"
+            },
+            follow_redirects=True
+        )
+
+        self.assertEquals(response.status, "200 OK")
+        payload = json.loads(response.data)
+        self.assertEquals(payload['focus_interval'], "30:00")
+        self.assertEquals(payload['rest_interval'], '7:00')
+        self.assertEquals(payload['content_selected'], 'MOVEMENT')
+        self.assertEquals(payload['mood_rating_1'], 2)
+        self.assertEquals(payload['mood_rating_2'], 4)
 
 
 if __name__ == "__main__":
