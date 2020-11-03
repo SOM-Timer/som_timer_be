@@ -21,3 +21,7 @@ class Exercise(db.Model):
 
     def __repr__(self):
         return f"<Exercise {self.id}>"
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

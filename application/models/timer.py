@@ -11,7 +11,11 @@ class Timer(db.Model):
     def __init__(self, work_interval, rest_interval, sound):
         self.work_interval = work_interval
         self.rest_interval = rest_interval
-        self.sound = sound 
+        self.sound = sound
 
     def __repr__(self):
         return f"<Timer {self.id}>"
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

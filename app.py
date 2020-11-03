@@ -2,12 +2,30 @@ from flask import Flask, jsonify, request
 from application import create_app, db
 from application.models.exercise import Exercise
 from application.models.timer import Timer
+from application.models.work_session import WorkSession
+from application.models.rest_session import RestSession
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, create_engine
 import os
+from sqlalchemy.orm import sessionmaker
 
 app = create_app("development")
 db = SQLAlchemy(app)
+
+@app.cli.command('db_reset')
+def db_reset():
+    exercises = Exercise.query.all()
+    for exercise in exercises:
+        Exercise.delete(exercise)
+
+    timers = Timer.query.all()
+    for timer in timers:
+        Timer.delete(timer)
+
+    rests = Rest.query.all()
+    for rest in rests:
+        Rest.delete(rest)
+
 
 @app.cli.command('db_seed')
 def db_seed():
