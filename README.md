@@ -108,6 +108,48 @@ EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 }
 ```
 
+#### GET  '/api/rests'
+
+```
+#RESPONSE BODY
+{
+    count: 1, 
+    rests: [
+        {
+            "id": 1,
+            "mood_rating_1": 3,
+            "mood_rating_2": 5,
+            "content_selected": "MOVEMENT",
+            "focus_interval": "25:00",
+            "rest_interval": "5:00"
+        }
+    ]
+}
+```
+
+#### POST  '/api/rests/id'
+
+```
+#REQUEST BODY
+{
+"mood_rating_1": 4,
+"mood_rating_2": 5,
+"content_selected": "SOMATIC",
+"focus_interval": "45:00",
+"rest_interval": "10:00"
+}
+
+#RESPONSE BODY
+{
+    "id": 2,
+    "mood_rating_1": 4,
+    "mood_rating_2": 5,
+    "content_selected": "SOMATIC",
+    "focus_interval": "45:00",
+    "rest_interval": "10:00"
+}
+```
+
 ## Tools:
 - Python3.9 
 - Flask 
