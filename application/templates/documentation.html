@@ -68,5 +68,56 @@
             </p>
         </pre>
       </div>
+
+      <div class="rests">
+        <h3>GET  '/api/rests'</h3>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                count: <number of rests>,
+                rests: [
+                {
+                  id: 1,
+                  mood_rating_1: 3,
+                  mood_rating_2: 5,
+                  content_selected: "MOVEMENT",
+                  focus_interval: "25:00",
+                  rest_interval: "5"
+                },
+                ...]
+            </p>
+          </pre>
+      </div>
+
+      <div class="create_rest">
+        <h3>POST  '/api/rests'</h3>
+        <p class="sub_header">Request Body:</p>
+          <pre>
+            <p class="code_block">
+              {
+                id: 1,
+                mood_rating_1: 2,
+                mood_rating_2: 5,
+                content_selected: "SOMATIC",
+                focus_interval: "45:00",
+                rest_interval: "10"
+              }
+            </p>
+          </pre>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                id: 1,
+                mood_rating_1: 2,
+                mood_rating_2: 5,
+                content_selected: "SOMATIC",
+                focus_interval: "45:00",
+                rest_interval: "10"
+              }
+            </p>
+          </pre>
+      </div>
   </body>
 </html>

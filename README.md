@@ -1,4 +1,4 @@
-# Som Timer Backend 
+# Som Timer Backend
 
 See [Som Timer Frontend](https://github.com/SOM-Timer/som_timer_fe) for more information!
 
@@ -7,7 +7,7 @@ Tech stack: [Python3.9](https://www.python.org/downloads/) on [Flask](https://fl
 Testing: UnitTest </br>
 Functionality: timer and exercise endpoints built to deliver a guided interval work/rest experience.  </br>
 
-## Learning Goals: 
+## Learning Goals:
 - Ultimately, demonstrate knowledge you’ve gained throughout Turing
 - Use an agile process to turn well defined requirements into deployed and production ready software
 - Gain experience dividing applications into components and domains of responsibilities to facilitate multi-developer teams. Service oriented architecture concepts and patterns are highly encouraged.
@@ -16,42 +16,42 @@ Functionality: timer and exercise endpoints built to deliver a guided interval w
 - Gain more experience using continuous integration tools to build and automate the deployment of features in various environments
 - Build applications that execute in development, test, CI, and production environments
 - Focus on communication between front-end and back-end teams in order to complete and deploy features that have been outlined by the project spec
-- At least 25% test coverage 
-- Successfully implement a new framework (flask) and a new language (python) 
+- At least 25% test coverage
+- Successfully implement a new framework (flask) and a new language (python)
 
 ## Setup:
 ```
-    clone and setup locally 
-# enter the virtual enviroment 
-    $ . venv/bin/activate 
-# install requirements 
-    $ pip install -r requirements.txt 
-# create and configure database 
-    $ createdb som_timer 
+    clone and setup locally
+# enter the virtual enviroment
+    $ . venv/bin/activate
+# install requirements
+    $ pip install -r requirements.txt
+# create and configure database
+    $ createdb som_timer
     $ export DATABASE_URL=postgresql://localhost:5432/som_timer
-# migrate database 
+# migrate database
     $ python manage.py db init
-    $ python manage.py db migrate 
-    $ python manage.py db upgrade 
-# seed database 
-    $ flask db_seed 
+    $ python manage.py db migrate
+    $ python manage.py db upgrade
+# seed database
+    $ flask db_seed
 ```
 
 #### Running the app:
-Command: 
-``` 
-$ python run.py 
+Command:
+```
+$ python run.py
 ```
 Port: `http://localhost:5000` </br>
 
-## Testing: 
-To run tests: 
+## Testing:
+To run tests:
 ```
 $ nosetests
 ```
-To run tests and produce a coverage report: 
+To run tests and produce a coverage report:
 ```
-$ coverage run --omit 'venv/*' -m nose 
+$ coverage run --omit 'venv/*' -m nose
 $ coverage report -m
 ```
 
@@ -76,7 +76,7 @@ $ coverage report -m
 #REQUEST BODY
 {
     "work_interval": "30:00",
-    "rest_interval": "7:00", 
+    "rest_interval": "7:00",
     "sound": "gong"
 }
 
@@ -108,12 +108,12 @@ EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 }
 ```
 
-#### GET  '/api/rests'
+#### GET '/api/rests'
 
 ```
 #RESPONSE BODY
 {
-    count: 1, 
+    count: 1,
     rests: [
         {
             "id": 1,
@@ -127,7 +127,7 @@ EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 }
 ```
 
-#### POST  '/api/rests/id'
+#### POST  '/api/rests'
 
 ```
 #REQUEST BODY
@@ -151,13 +151,13 @@ EX: '<root_path>/api/rand_exercise?duration=10:00&category=SOMATIC'
 ```
 
 ## Tools:
-- Python3.9 
-- Flask 
-- Unittest 
-- SQLAlchemy 
+- Python3.9
+- Flask
+- Unittest
+- SQLAlchemy
 - Postgres
-- TravisCI 
-- Heroku 
+- TravisCI
+- Heroku
 
 ## Authors:
 [Dorion](https://github.com/sciencefixion) </br>
