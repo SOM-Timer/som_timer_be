@@ -18,7 +18,7 @@ class TestTimers(unittest.TestCase):
             db.drop_all()
 
     def test_get_one_timer(self):
-        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff')
+        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=True)
         with self.app.app_context():
                 db.session.add(timer1)
                 db.session.commit()
@@ -33,9 +33,10 @@ class TestTimers(unittest.TestCase):
         self.assertEquals(payload['work_interval'], "25:00")
         self.assertEquals(payload['rest_interval'], '5:00')
         self.assertEquals(payload['sound'], 'chordCliff')
+        self.assertEquals(payload['mood'], True)
 
     def test_update_timer(self):
-        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff')
+        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False)
         with self.app.app_context():
                 db.session.add(timer1)
                 db.session.commit()
@@ -45,7 +46,8 @@ class TestTimers(unittest.TestCase):
             json={
                 "work_interval": "30:00",
                 "rest_interval": "7:00",
-                "sound": "chordCliff"
+                "sound": "chordCliff",
+                "mood": False
             },
             follow_redirects=True
         )
@@ -55,6 +57,7 @@ class TestTimers(unittest.TestCase):
         self.assertEquals(payload['work_interval'], "30:00")
         self.assertEquals(payload['rest_interval'], '7:00')
         self.assertEquals(payload['sound'], 'chordCliff')
+        self.assertEquals(payload['mood'], False)
 
 if __name__ == "__main__":
     unittest.main()
