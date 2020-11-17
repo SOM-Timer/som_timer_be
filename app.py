@@ -71,7 +71,7 @@ def db_seed():
     Seeds.append(Exercise(url='https://www.youtube.com/watch?v=zsCVqFr6j1g&feature=emb_logo', duration='10:00', category='SOMATIC'))
 
     #Default Timer
-    Seeds.append(Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff'))
+    Seeds.append(Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=True))
 
     for x in Seeds:
         db.session.add(x)
