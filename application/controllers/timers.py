@@ -7,7 +7,8 @@ timer_fields = {
     'id': fields.Integer,
     'work_interval': fields.String,
     'rest_interval': fields.String,
-    'sound': fields.String
+    'sound': fields.String,
+    'mood': fields.Boolean
 }
 
 timer_list_fields = {
@@ -33,6 +34,9 @@ class TimersResource(Resource):
 
         if 'sound' in request.json:
             timer.sound = request.json['sound']
+
+        if 'mood' in request.json:
+            timer.mood = request.json['mood']
 
         db.session.commit()
         return timer
