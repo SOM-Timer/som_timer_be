@@ -74,5 +74,30 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(payload['user_name'], "Rachel Williams")
         self.assertEquals(payload['token'], "token3")
 
+    def test_no_user_creation_on_token_match(self):
+
+        self.test_app.post(
+            '/api/users',
+            json={
+                "user_name": "Rachel Williams",
+                "token": "token3",
+            },
+            follow_redirects=True
+        )
+
+        response = self.test_app.post(
+            '/api/users',
+            json={
+                "user_name": "RW",
+                "token": "token3",
+            },
+            follow_redirects=True
+        )
+
+        self.assertEquals(response.status, "200 OK")
+        payload = json.loads(response.data)
+        self.assertEquals(payload['user_name'], "Rachel Williams")
+        self.assertEquals(payload['token'], "token3")
+
 if __name__ == "__main__":
     unittest.main()
