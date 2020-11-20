@@ -61,8 +61,13 @@ class UsersResource(Resource):
     def post(self):
         args = user_post_parser.parse_args()
 
-        user = User(**args)
-        db.session.add(user)
-        db.session.commit()
-
-        return user
+        existing_user = User.query.filter_by(token=args.token).first()
+        if existing_user is None:
+            user = User(**args)
+            db.session.add(user)
+            db.session.commit()
+            print ("user created!")
+            return user
+        else:
+            print ("a user already exists with that token...")
+            return existing_user
