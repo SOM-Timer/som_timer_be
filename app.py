@@ -3,6 +3,7 @@ from application import create_app, db
 from application.models.exercise import Exercise
 from application.models.timer import Timer
 from application.models.rest import Rest
+from application.models.user import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData, create_engine
 import os
@@ -24,6 +25,10 @@ def db_reset():
     rests = Rest.query.all()
     for rest in rests:
         Rest.delete(rest)
+
+    users = User.query.all()
+    for user in users:
+        User.delete(user)
 
 @app.cli.command('db_seed')
 def db_seed():

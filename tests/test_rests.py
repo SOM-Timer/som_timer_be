@@ -45,7 +45,7 @@ class TestRests(unittest.TestCase):
         self.assertEquals(payload['rests'][1]['focus_interval'], '25:00')
         self.assertEquals(payload['rests'][1]['rest_interval'], '7:00')
 
-    def test_update_timer(self):
+    def test_create_rest(self):
 
         response = self.test_app.post(
             '/api/rests',

@@ -122,5 +122,67 @@
             </p>
           </pre>
       </div>
+
+      <div class="all_users">
+        <h3>GET  '/api/users'</h3>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                count: <number of users>,
+                users: [
+                {
+                  id: 1,
+                  user_name: "princess.kopf",
+                  token: "token1"
+                },
+                {
+                  id: 2,
+                  user_name: "ABD",
+                  token: "token2"
+                },
+                ...]
+            </p>
+          </pre>
+      </div>
+
+      <div class="user_by_id">
+        <h3>GET  '/api/users/:id'</h3>
+        <p> id = 1 </p>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                id: 1,
+                user_name: "princess.kopf",
+                token: "token1"
+              }
+            </p>
+          </pre>
+      </div>
+
+      <div class="create_user">
+        <h3>POST  '/api/users'</h3>
+        <p> ** Will not create a user if that user already exists in the db ** </p>
+        <p class="sub_header">Request Body:</p>
+          <pre>
+            <p class="code_block">
+              {
+                user_name: "princess_peach",
+                token: "token3"
+              }
+            </p>
+          </pre>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                id: 3,
+                user_name: "princess_peach",
+                token: "token3"
+              }
+            </p>
+          </pre>
+      </div>
   </body>
 </html>
