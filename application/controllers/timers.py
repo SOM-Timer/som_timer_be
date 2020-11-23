@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
 from application.models.timer import Timer
+from application.models.user import User
+
 from application import db
 
 timer_fields = {
@@ -12,10 +14,23 @@ timer_fields = {
     'user_id': fields.Integer
 }
 
+user_fields = {
+    'id': fields.Integer,
+    'user_name': fields.String,
+    'token': fields.String
+}
+
 timer_list_fields = {
     'count': fields.Integer,
     'timers': fields.List(fields.Nested(timer_fields)),
 }
+
+class TimerUserResource(Resource):
+    def get(self, timer_id=None):
+        if timer_id:
+            timer = Timer.query.filter_by(id=timer_id).first()
+            user = User.query.filter_by(id=timer.user_id).first()
+            return marshal(user, user_fields)
 
 class TimersResource(Resource):
     def get(self, timer_id=None):
