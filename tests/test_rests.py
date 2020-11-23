@@ -18,8 +18,8 @@ class TestRests(unittest.TestCase):
             db.drop_all()
 
     def test_get_all_rests(self):
-        rest1 = Rest(mood_rating_1 = 2, mood_rating_2 = 4, rest_interval='5:00', focus_interval='30:00', content_selected='SOMATIC')
-        rest2 = Rest(mood_rating_1 = 4, mood_rating_2 = 5, rest_interval='7:00', focus_interval = '25:00', content_selected='MOVEMENT')
+        rest1 = Rest(mood_rating_1 = 2, mood_rating_2 = 4, rest_interval='5:00', focus_interval='30:00', content_selected='SOMATIC', user_id=1)
+        rest2 = Rest(mood_rating_1 = 4, mood_rating_2 = 5, rest_interval='7:00', focus_interval = '25:00', content_selected='MOVEMENT', user_id=2)
         with self.app.app_context():
             db.session.add(rest1)
             db.session.add(rest2)
@@ -39,11 +39,13 @@ class TestRests(unittest.TestCase):
         self.assertEquals(payload['rests'][0]['content_selected'], 'SOMATIC')
         self.assertEquals(payload['rests'][0]['focus_interval'], '30:00')
         self.assertEquals(payload['rests'][0]['rest_interval'], '5:00')
+        self.assertEquals(payload['rests'][0]['user_id'], 1)
         self.assertEquals(payload['rests'][1]['mood_rating_1'], 4)
         self.assertEquals(payload['rests'][1]['mood_rating_2'], 5)
         self.assertEquals(payload['rests'][1]['content_selected'], 'MOVEMENT')
         self.assertEquals(payload['rests'][1]['focus_interval'], '25:00')
         self.assertEquals(payload['rests'][1]['rest_interval'], '7:00')
+        self.assertEquals(payload['rests'][1]['user_id'], 2)
 
     def test_create_rest(self):
 
@@ -54,7 +56,8 @@ class TestRests(unittest.TestCase):
                 "mood_rating_2": 4,
                 "focus_interval": "30:00",
                 "rest_interval": "7:00",
-                "content_selected": "MOVEMENT"
+                "content_selected": "MOVEMENT",
+                "user_id": 2
             },
             follow_redirects=True
         )
@@ -66,6 +69,7 @@ class TestRests(unittest.TestCase):
         self.assertEquals(payload['content_selected'], 'MOVEMENT')
         self.assertEquals(payload['mood_rating_1'], 2)
         self.assertEquals(payload['mood_rating_2'], 4)
+        self.assertEquals(payload['user_id'], 2)
 
 
 if __name__ == "__main__":
