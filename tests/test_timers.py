@@ -37,6 +37,23 @@ class TestTimers(unittest.TestCase):
         self.assertEquals(payload['mood'], True)
         self.assertEquals(payload['user_id'], 1)
 
+    def test_get_user_for_timer(self):
+        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=1)
+        with self.app.app_context():
+                db.session.add(timer1)
+                db.session.commit()
+
+        response = self.test_app.get(
+            '/api/timers/1/user',
+            follow_redirects=True
+        )
+
+        self.assertEquals(response.status, "200 OK")
+        payload = json.loads(response.data)
+        import code; code.interact(local=dict(globals(), **locals()))
+        self.assertEquals(payload['user_name'], None) ## FIX ME!! NOT A GOOD TEST
+        self.assertEquals(payload['token'], None) ## Works in postman!
+
     def test_update_timer(self):
         timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=1)
         with self.app.app_context():
