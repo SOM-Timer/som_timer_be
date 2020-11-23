@@ -33,12 +33,13 @@ def create_app(config_name):
     api = Api(app)
     api.prefix = '/api'
 
-    from application.controllers.timers import TimersResource
+    from application.controllers.timers import TimersResource, TimerUserResource
     from application.controllers.rests import RestsResource
     from application.controllers.exercises import ExercisesResource, RandExercises
     from application.controllers.users import UsersResource
 
     api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
+    api.add_resource(TimerUserResource, '/timers/<int:timer_id>/user')
     api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
     api.add_resource(RandExercises, '/rand_exercise')
     api.add_resource(RestsResource, '/rests')
