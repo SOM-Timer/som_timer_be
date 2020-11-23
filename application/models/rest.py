@@ -9,13 +9,19 @@ class Rest(db.Model):
     content_selected = db.Column(db.String())
     focus_interval = db.Column(db.String())
     rest_interval = db.Column(db.String())
+    user_id = db.Column(
+        db.Integer,
+        db.ForeignKey('users.id'),
+        nullable=False
+    )
 
-    def __init__(self, mood_rating_1, mood_rating_2, content_selected, focus_interval, rest_interval):
+    def __init__(self, mood_rating_1, mood_rating_2, content_selected, focus_interval, rest_interval, user_id):
         self.mood_rating_1 = mood_rating_1
         self.mood_rating_2 = mood_rating_2
         self.content_selected = content_selected
         self.focus_interval = focus_interval
         self.rest_interval = rest_interval
+        self.user_id = user_id
 
     def __repr__(self):
         return f"<Rest {self.id}>"
