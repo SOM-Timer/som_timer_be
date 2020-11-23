@@ -50,7 +50,6 @@ class TestTimers(unittest.TestCase):
 
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
-        import code; code.interact(local=dict(globals(), **locals()))
         self.assertEquals(payload['user_name'], None) ## FIX ME!! NOT A GOOD TEST
         self.assertEquals(payload['token'], None) ## Works in postman!
 
