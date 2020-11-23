@@ -74,12 +74,17 @@ def db_seed():
     Seeds.append(Exercise(url='https://www.youtube.com/watch?v=1saZqSr2zGM', duration='7:00', category='SOMATIC'))
     Seeds.append(Exercise(url='https://soundcloud.com/ucsdmindfulness/10-min-body-scan-by-christy-cassisa?in=ucsdmindfulness/sets/short-meditation-sessions', duration='10:00', category='SOMATIC'))
     Seeds.append(Exercise(url='https://www.youtube.com/watch?v=zsCVqFr6j1g&feature=emb_logo', duration='10:00', category='SOMATIC'))
-
-    #Default Timer
-    Seeds.append(Timer(work_interval='25:00', rest_interval='5:00', sound='reverbSplash', mood=True))
-
+    
     for x in Seeds:
         db.session.add(x)
+
+    # Admin User
+    user = User(user_name='Admin', token='adminToken')
+    db.session.add(user)
+
+    # Timer For Admin
+    timer = Timer(work_interval='25:00', rest_interval='5:00', sound='reverbSplash', mood=True, user_id=1)
+    db.session.add(timer)
 
     db.session.commit()
     print('Database Seeded!')
