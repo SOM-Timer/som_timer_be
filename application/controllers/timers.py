@@ -25,6 +25,7 @@ timer_list_fields = {
     'timers': fields.List(fields.Nested(timer_fields)),
 }
 
+## maybe not necessary. Depends on FE use. 
 class TimerUserResource(Resource):
     def get(self, timer_id=None):
         if timer_id:
