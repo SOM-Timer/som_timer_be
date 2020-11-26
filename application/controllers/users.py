@@ -2,6 +2,7 @@ from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
 from application.models.user import User
 from application.models.timer import Timer
+from application.models.rest import Rest
 from application import db
 
 user_fields = {
@@ -23,6 +24,21 @@ timer_fields = {
     'sound': fields.String,
     'mood': fields.Boolean,
     'user_id': fields.Integer
+}
+
+rest_fields = {
+    'id': fields.Integer,
+    'mood_rating_1': fields.Integer,
+    'mood_rating_2': fields.Integer,
+    'content_selected': fields.String,
+    'focus_interval': fields.String,
+    'rest_interval': fields.String,
+    'user_id': fields.Integer
+}
+
+rest_list_fields = {
+    'count': fields.Integer,
+    'rests': fields.List(fields.Nested(rest_fields)),
 }
 
 user_post_parser = reqparse.RequestParser()
@@ -53,6 +69,34 @@ class UserTimerResource(Resource):
         if user_id:
             timer = Timer.query.filter_by(user_id=user_id).first()
             return marshal(timer, timer_fields)
+
+class UserRestsResource(Resource):
+    def get(self, user_id=None, rest_id=None):
+        if user_id:
+            if rest_id:
+                rest = Rest.query.filter_by(user_id=user_id, id=rest_id).first()
+                return marshal(rest, rest_fields)
+            else:
+                args = request.args.to_dict()
+                limit = args.get('limit', 0)
+                offset = args.get('offset', 0)
+
+                args.pop('limit', None)
+                args.pop('offset', None)
+
+                rest = Rest.query.filter_by(user_id=user_id, **args).order_by(Rest.id)
+                if limit:
+                    rest = rest.limit(limit)
+
+                if offset:
+                    rest = rest.offset(offset)
+
+                rest = rest.all()
+
+                return marshal({
+                    'count': len(rest),
+                    'rests': [marshal(t, rest_fields) for t in rest]
+                }, rest_list_fields)
 
 class UsersResource(Resource):
     def get(self, user_id=None):
