@@ -2,11 +2,12 @@ import unittest
 import json
 from application import create_app, db
 from application.models.timer import Timer
-
+from application.models.user import User
 
 class TestTimers(unittest.TestCase):
     def setUp(self):
         self.app = create_app('testing')
+
         self.test_app = self.app.test_client()
         with self.app.app_context():
             db.create_all()
@@ -18,7 +19,7 @@ class TestTimers(unittest.TestCase):
             db.drop_all()
 
     def test_get_one_timer(self):
-        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=True)
+        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=True, user_id=1)
         with self.app.app_context():
                 db.session.add(timer1)
                 db.session.commit()
@@ -34,9 +35,10 @@ class TestTimers(unittest.TestCase):
         self.assertEquals(payload['rest_interval'], '5:00')
         self.assertEquals(payload['sound'], 'chordCliff')
         self.assertEquals(payload['mood'], True)
+        self.assertEquals(payload['user_id'], 1)
 
     def test_update_timer(self):
-        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False)
+        timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=1)
         with self.app.app_context():
                 db.session.add(timer1)
                 db.session.commit()
@@ -47,7 +49,8 @@ class TestTimers(unittest.TestCase):
                 "work_interval": "30:00",
                 "rest_interval": "7:00",
                 "sound": "chordCliff",
-                "mood": False
+                "mood": False,
+                "user_id": 2
             },
             follow_redirects=True
         )
@@ -58,6 +61,7 @@ class TestTimers(unittest.TestCase):
         self.assertEquals(payload['rest_interval'], '7:00')
         self.assertEquals(payload['sound'], 'chordCliff')
         self.assertEquals(payload['mood'], False)
+        self.assertEquals(payload['user_id'], 2)
 
 if __name__ == "__main__":
     unittest.main()
