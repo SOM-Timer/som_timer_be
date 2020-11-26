@@ -44,7 +44,7 @@ def create_app(config_name):
     api.add_resource(RestsResource, '/rests')
     api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
     api.add_resource(UserTimerResource, '/users/<int:user_id>/timer')
-    api.add_resource(UserRestsResource, '/users/<int:user_id>/rests', '/users/<int:user_id>/rests/<int:rest_id>'')
+    api.add_resource(UserRestsResource, '/users/<int:user_id>/rests', '/users/<int:user_id>/rests/<int:rest_id>')
 
     @app.route('/')
     def root():
