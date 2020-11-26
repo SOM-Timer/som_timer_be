@@ -64,6 +64,43 @@ user_post_parser.add_argument(
     help='token parameter is required'
 )
 
+timer_post_parser = reqparse.RequestParser()
+timer_post_parser.add_argument(
+    'work_interval',
+    type=str,
+    required=True,
+    location=['json'],
+    help='work_interval parameter is required'
+)
+timer_post_parser.add_argument(
+    'rest_interval',
+    type=str,
+    required=True,
+    location=['json'],
+    help='rest_interval parameter is required'
+)
+timer_post_parser.add_argument(
+    'sound',
+    type=str,
+    required=True,
+    location=['json'],
+    help='sound parameter is required'
+)
+timer_post_parser.add_argument(
+    'mood',
+    type=str,
+    required=True,
+    location=['json'],
+    help='mood parameter is required'
+)
+timer_post_parser.add_argument(
+    'user_id',
+    type=str,
+    required=True,
+    location=['json'],
+    help='user_id parameter is required'
+)
+
 class UserTimerResource(Resource):
     def get(self, user_id=None):
         if user_id:
@@ -134,7 +171,7 @@ class UsersResource(Resource):
             user = User(**args)
             db.session.add(user)
             db.session.commit()
-            print ("user created!")
+            print ("user and associated timer created!")
             return user
         else:
             print ("a user already exists with that token...")
