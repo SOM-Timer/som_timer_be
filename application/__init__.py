@@ -36,7 +36,7 @@ def create_app(config_name):
     from application.controllers.timers import TimersResource
     from application.controllers.rests import RestsResource
     from application.controllers.exercises import ExercisesResource, RandExercises
-    from application.controllers.users import UsersResource, UserTimerResource
+    from application.controllers.users import UsersResource, UserTimerResource, UserRestsResource
 
     api.add_resource(TimersResource, '/timers', '/timers/<int:timer_id>')
     api.add_resource(ExercisesResource, '/exercises', '/exercises/<int:exercise_id>')
@@ -44,6 +44,7 @@ def create_app(config_name):
     api.add_resource(RestsResource, '/rests')
     api.add_resource(UsersResource, '/users', '/users/<int:user_id>')
     api.add_resource(UserTimerResource, '/users', '/users/<int:user_id>/timer')
+    api.add_resource(UserRestsResource, '/users', '/users/<int:user_id>/rests')
 
     @app.route('/')
     def root():
