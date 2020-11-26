@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse, request
 from flask_restful import fields, marshal_with, marshal
 from application.models.user import User
+from application.models.timer import Timer
 from application import db
 
 user_fields = {
@@ -13,6 +14,15 @@ user_fields = {
 user_list_fields = {
     'count': fields.Integer,
     'users': fields.List(fields.Nested(user_fields)),
+}
+
+timer_fields = {
+    'id': fields.Integer,
+    'work_interval': fields.String,
+    'rest_interval': fields.String,
+    'sound': fields.String,
+    'mood': fields.Boolean,
+    'user_id': fields.Integer
 }
 
 user_post_parser = reqparse.RequestParser()
@@ -37,6 +47,12 @@ user_post_parser.add_argument(
     location=['json'],
     help='token parameter is required'
 )
+
+class UserTimerResource(Resource):
+    def get(self, user_id=None):
+        if user_id:
+            timer = Timer.query.filter_by(user_id=user_id).first()
+            return marshal(timer, timer_fields)
 
 class UsersResource(Resource):
     def get(self, user_id=None):
