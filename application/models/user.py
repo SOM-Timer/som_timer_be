@@ -17,7 +17,8 @@ class User(db.Model):
         return f"<User {self.id}>"
 
     def delete(self):
-        db.session.delete(db.session.query(Timer).filter_by(user_id=self.id))
-        db.session.delete(db.session.query(Rest).filter_by(user_id=self.id))
+        ### A chain delete like this is best practice and should work but will take more research
+        # db.session.delete(db.session.query(Timer).filter_by(user_id=self.id))
+        # db.session.delete(db.session.query(Rest).filter_by(user_id=self.id))
         db.session.delete(self)
         db.session.commit()
