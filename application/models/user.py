@@ -17,5 +17,7 @@ class User(db.Model):
         return f"<User {self.id}>"
 
     def delete(self):
+        db.session.delete(db.session.query(Timer).filter_by(user_id=self.id))
+        db.session.delete(db.session.query(Rest).filter_by(user_id=self.id))
         db.session.delete(self)
         db.session.commit()
