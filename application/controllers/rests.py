@@ -9,7 +9,8 @@ rest_fields = {
     'mood_rating_2': fields.Integer,
     'content_selected': fields.String,
     'focus_interval': fields.String,
-    'rest_interval': fields.String
+    'rest_interval': fields.String,
+    'user_id': fields.Integer
 }
 
 rest_list_fields = {
@@ -52,6 +53,13 @@ rest_post_parser.add_argument(
     required=True,
     location=['json'],
     help='rest interval parameter is required'
+)
+rest_post_parser.add_argument(
+    'user_id',
+    type=int,
+    required=True,
+    location=['json'],
+    help='user_id parameter is required'
 )
 
 class RestsResource(Resource):
