@@ -81,6 +81,39 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(payload['user_name'], "Rachel Williams")
         self.assertEquals(payload['token'], "token3")
 
+    def test_creating_a_user_creates_associated_default_timer(self):
+
+        self.test_app.post(
+            '/api/users',
+            json={
+                "uid": 123456,
+                "user_name": "Sienna Kopf",
+                "token": "token5",
+            },
+            follow_redirects=True
+        )
+
+        response = self.test_app.get(
+            '/api/users/1/timer',
+            json={
+                "id": 1,
+                "work_interval": "25:00",
+                "rest_interval": "5:00",
+                "sound": "reverbSplash",
+                "mood": True,
+                "user_id": 1
+            }
+        )
+
+        self.assertEquals(response.status, "200 OK")
+        payload = json.loads(response.data)
+        self.assertEquals(payload['id'], 1)
+        self.assertEquals(payload['work_interval'], "25:00")
+        self.assertEquals(payload['rest_interval'], '5:00')
+        self.assertEquals(payload['sound'], 'reverbSplash')
+        self.assertEquals(payload['mood'], True)
+        self.assertEquals(payload['user_id'], 1)
+
     def test_no_user_creation_on_uid_match(self):
 
         self.test_app.post(
