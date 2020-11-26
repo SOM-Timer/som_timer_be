@@ -2,6 +2,7 @@ import unittest
 import json
 from application import create_app, db
 from application.models.user import User
+from application.models.timer import Timer
 
 
 class TestUsers(unittest.TestCase):
@@ -106,6 +107,27 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(payload['uid'], 987654)
         self.assertEquals(payload['user_name'], "Rachel Williams")
         self.assertEquals(payload['token'], "token3")
+
+    # def test_get_timer_for_user(self): ## WORKS IN POSTMAN
+    #     user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
+    #     timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=user1.id)
+    #     with self.app.app_context():
+    #             db.session.add(user1)
+    #             db.session.commit()
+    #
+    #     response = self.test_app.get(
+    #         '/api/users/1/timer',
+    #         follow_redirects=True
+    #     )
+    #
+    #     self.assertEquals(response.status, "200 OK")
+    #     payload = json.loads(response.data)
+    #     self.assertEquals(payload['id'], 1)
+    #     self.assertEquals(payload['work_interval'], "25:00")
+    #     self.assertEquals(payload['rest_interval'], "5:00")
+    #     self.assertEquals(payload['sound'], "chordCliff")
+    #     self.assertEquals(payload['mood'], False)
+    #     self.assertEquals(payload['user_id'], 1)
 
 if __name__ == "__main__":
     unittest.main()
