@@ -16,7 +16,8 @@
               "work_interval": "25:00",
               "rest_interval": "5:00"
               "sound": "reverbSplash",
-              "mood": true
+              "mood": true,
+              "user_id": 1
             }
           </p>
         </pre>
@@ -30,7 +31,7 @@
               "work_interval": "30:00",
               "rest_interval": "7:00",
               "sound": "gong",
-              "mood": false
+              "mood": False
             }
           </p>
         </pre>
@@ -42,7 +43,8 @@
               "work_interval": "30:00",
               "rest_interval": "7:00",
               "sound": "gong",
-              "mood": false
+              "mood": false,
+              "user_id": 1
             }
           </p>
         </pre>
@@ -86,9 +88,11 @@
                   mood_rating_2: 5,
                   content_selected: "MOVEMENT",
                   focus_interval: "25:00",
-                  rest_interval: "5"
+                  rest_interval: "5",
+                  user_id: 1
                 },
                 ...]
+              }
             </p>
           </pre>
       </div>
@@ -104,7 +108,8 @@
                 mood_rating_2: 5,
                 content_selected: "SOMATIC",
                 focus_interval: "45:00",
-                rest_interval: "10"
+                rest_interval: "10",
+                user_id: 1
               }
             </p>
           </pre>
@@ -117,7 +122,8 @@
                 mood_rating_2: 5,
                 content_selected: "SOMATIC",
                 focus_interval: "45:00",
-                rest_interval: "10"
+                rest_interval: "10",
+                user_id: 1
               }
             </p>
           </pre>
@@ -185,6 +191,44 @@
                 uid: <user_id specific to google OAuth>,
                 user_name: "princess_peach",
                 token: "token3"
+              }
+            </p>
+          </pre>
+      </div>
+      <div class="timer_by_user">
+        <h3>GET  '/api/users/:user_id/timer'</h3>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                "id": 1,
+                "work_interval": "25:00",
+                "rest_interval": "5:00"
+                "sound": "reverbSplash",
+                "mood": true,
+                "user_id": <user_id>
+              }
+            </p>
+          </pre>
+      </div>
+      <div class="rests_by_user">
+        <h3>GET  '/api/users/:user_id/rests'</h3>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                count: <number of rests>,
+                rests: [
+                {
+                  id: 1,
+                  mood_rating_1: 3,
+                  mood_rating_2: 5,
+                  content_selected: "MOVEMENT",
+                  focus_interval: "25:00",
+                  rest_interval: "5",
+                  user_id: <user_id>
+                },
+                ...]
               }
             </p>
           </pre>
