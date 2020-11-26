@@ -5,6 +5,7 @@ from application import db
 
 user_fields = {
     'id': fields.Integer,
+    'uid': fields.Integer,
     'user_name': fields.String,
     'token': fields.String
 }
@@ -15,6 +16,13 @@ user_list_fields = {
 }
 
 user_post_parser = reqparse.RequestParser()
+user_post_parser.add_argument(
+    'uid',
+    type=int,
+    required=True,
+    location=['json'],
+    help='uid parameter is required'
+)
 user_post_parser.add_argument(
     'user_name',
     type=str,
@@ -61,7 +69,7 @@ class UsersResource(Resource):
     def post(self):
         args = user_post_parser.parse_args()
 
-        existing_user = User.query.filter_by(token=args.token).first()
+        existing_user = User.query.filter_by(uid=args.uid).first()
         if existing_user is None:
             user = User(**args)
             db.session.add(user)
