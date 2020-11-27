@@ -20,8 +20,8 @@ class TestUsers(unittest.TestCase):
             db.drop_all()
 
     def test_get_all_users(self):
-        user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
-        user2 = User(uid=654321, user_name="ABD", token="token2")
+        user1 = User(user_name="Princess.Kopf", email="princesskopf@gmail.com")
+        user2 = User(user_name="ABD", email="abd@gmail.com")
         with self.app.app_context():
             db.session.add(user1)
             db.session.add(user2)
@@ -36,16 +36,14 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
         self.assertEquals(payload['count'], 2)
-        self.assertEquals(payload['users'][0]['uid'], 123456)
         self.assertEquals(payload['users'][0]['user_name'], "Princess.Kopf")
-        self.assertEquals(payload['users'][0]['token'], "token1")
-        self.assertEquals(payload['users'][1]['uid'], 654321)
+        self.assertEquals(payload['users'][0]['email'], "princesskopf@gmail.com")
         self.assertEquals(payload['users'][1]['user_name'], "ABD")
-        self.assertEquals(payload['users'][1]['token'], "token2")
+        self.assertEquals(payload['users'][1]['email'], "abd@gmail.com")
 
     def test_get_user_by_id(self):
-        user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
-        user2 = User(uid=654321, user_name="ABD", token="token2")
+        user1 = User(user_name="Princess.Kopf", email="princesskopf@gmail.com")
+        user2 = User(user_name="ABD", email="abd@gmail.com")
         with self.app.app_context():
             db.session.add(user1)
             db.session.add(user2)
@@ -59,27 +57,24 @@ class TestUsers(unittest.TestCase):
         # Assert response is 200 OK.
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
-        self.assertEquals(payload['uid'], 123456)
         self.assertEquals(payload['user_name'], "Princess.Kopf")
-        self.assertEquals(payload['token'], "token1")
+        self.assertEquals(payload['email'], "princesskopf@gmail.com")
 
     def test_create_user(self):
 
         response = self.test_app.post(
             '/api/users',
             json={
-                "uid": 987654,
                 "user_name": "Rachel Williams",
-                "token": "token3",
+                "email": "rw@gmail.com",
             },
             follow_redirects=True
         )
 
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
-        self.assertEquals(payload['uid'], 987654)
         self.assertEquals(payload['user_name'], "Rachel Williams")
-        self.assertEquals(payload['token'], "token3")
+        self.assertEquals(payload['email'], "rw@gmail.com")
 
     # def test_creating_a_user_creates_associated_default_timer(self):
     #
@@ -114,14 +109,13 @@ class TestUsers(unittest.TestCase):
     #     self.assertEquals(payload['mood'], True)
     #     self.assertEquals(payload['user_id'], 1)
 
-    def test_no_user_creation_on_uid_match(self):
+    def test_no_user_creation_on_email_match(self):
 
         self.test_app.post(
             '/api/users',
             json={
-                "uid": 987654,
                 "user_name": "Rachel Williams",
-                "token": "token3",
+                "email": "rw@gmail.com",
             },
             follow_redirects=True
         )
@@ -129,18 +123,16 @@ class TestUsers(unittest.TestCase):
         response = self.test_app.post(
             '/api/users',
             json={
-                "uid": 987654,
                 "user_name": "RW",
-                "token": "token4",
+                "email": "rw@gmail.com",
             },
             follow_redirects=True
         )
 
         self.assertEquals(response.status, "200 OK")
         payload = json.loads(response.data)
-        self.assertEquals(payload['uid'], 987654)
         self.assertEquals(payload['user_name'], "Rachel Williams")
-        self.assertEquals(payload['token'], "token3")
+        self.assertEquals(payload['email'], "rw@gmail.com")
 
     # def test_get_timer_for_user(self): ## WORKS IN POSTMAN
     #     user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
