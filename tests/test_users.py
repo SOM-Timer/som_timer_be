@@ -135,10 +135,11 @@ class TestUsers(unittest.TestCase):
         self.assertEquals(payload['email'], "rw@gmail.com")
 
     # def test_get_timer_for_user(self): ## WORKS IN POSTMAN
-    #     user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
+    #     user1 = User(user_name="Princess.Kopf", email="princesskopf@gmail.com")
     #     timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=user1.id)
+    #
     #     with self.app.app_context():
-    #             db.session.add(user1)
+    #             db.session.add_all(user1)
     #             db.session.commit()
     #
     #     response = self.test_app.get(
