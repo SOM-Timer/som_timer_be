@@ -78,13 +78,5 @@ def db_seed():
     for x in Seeds:
         db.session.add(x)
 
-    # Admin User
-    user = User(user_name='Admin', email='somtimer@gmail.com')
-    db.session.add(user)
-
-    ## Timer For Admin
-    timer = Timer(work_interval='25:00', rest_interval='5:00', sound='reverbSplash', mood=True, user_id=1)
-    db.session.add(timer)
-
     db.session.commit()
     print('Database Seeded!')
