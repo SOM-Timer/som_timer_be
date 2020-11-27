@@ -27,9 +27,14 @@ class TestDocumentation(unittest.TestCase):
 
         html = response.data.decode()
         assert "Som Timer Endpoints" in html
-        assert "GET  '/api/timers/{timer_id}'" in html
-        assert "PUT  '/api/timers/{timer_id}'" in html
+        assert "GET  '/api/users/:user_id/timer'" in html
+        assert "PUT  '/api/users/:user_id/timer'" in html
         assert "GET  '/api/rand_exercise'" in html
+        assert "GET  '/api/users/:user_id/rests'" in html
+        assert "POST  '/api/users/:user_id/rests'" in html
+        assert "GET  '/api/users'" in html
+        assert "GET  '/api/users/:user_id'" in html
+        assert "POST  '/api/users'" in html
 
 if __name__ == "__main__":
     unittest.main()
