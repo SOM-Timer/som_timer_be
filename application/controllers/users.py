@@ -25,21 +25,6 @@ timer_fields = {
     'user_id': fields.Integer
 }
 
-rest_fields = {
-    'id': fields.Integer,
-    'mood_rating_1': fields.Integer,
-    'mood_rating_2': fields.Integer,
-    'content_selected': fields.String,
-    'focus_interval': fields.String,
-    'rest_interval': fields.String,
-    'user_id': fields.Integer
-}
-
-rest_list_fields = {
-    'count': fields.Integer,
-    'rests': fields.List(fields.Nested(rest_fields)),
-}
-
 user_post_parser = reqparse.RequestParser()
 user_post_parser.add_argument(
     'user_name',
@@ -86,6 +71,65 @@ timer_post_parser.add_argument(
     help='mood parameter is required'
 )
 timer_post_parser.add_argument(
+    'user_id',
+    type=int,
+    required=True,
+    location=['json'],
+    help='user_id parameter is required'
+)
+
+rest_fields = {
+    'id': fields.Integer,
+    'mood_rating_1': fields.Integer,
+    'mood_rating_2': fields.Integer,
+    'content_selected': fields.String,
+    'focus_interval': fields.String,
+    'rest_interval': fields.String,
+    'user_id': fields.Integer
+}
+
+rest_list_fields = {
+    'count': fields.Integer,
+    'rests': fields.List(fields.Nested(rest_fields)),
+}
+
+rest_post_parser = reqparse.RequestParser()
+rest_post_parser.add_argument(
+    'mood_rating_1',
+    type=int,
+    required=True,
+    location=['json'],
+    help='init mood parameter is required'
+)
+rest_post_parser.add_argument(
+    'mood_rating_2',
+    type=int,
+    required=True,
+    location=['json'],
+    help='end mood parameter is required'
+)
+rest_post_parser.add_argument(
+    'content_selected',
+    type=str,
+    required=True,
+    location=['json'],
+    help='content parameter is required'
+)
+rest_post_parser.add_argument(
+    'focus_interval',
+    type=str,
+    required=True,
+    location=['json'],
+    help='focus interval parameter is required'
+)
+rest_post_parser.add_argument(
+    'rest_interval',
+    type=str,
+    required=True,
+    location=['json'],
+    help='rest interval parameter is required'
+)
+rest_post_parser.add_argument(
     'user_id',
     type=int,
     required=True,
@@ -154,6 +198,17 @@ class UserRestsResource(Resource):
                     'count': len(rest),
                     'rests': [marshal(t, rest_fields) for t in rest]
                 }, rest_list_fields)
+
+    @marshal_with(rest_fields)
+    def post(self, user_id=None):
+        if user_id:
+            args = rest_post_parser.parse_args()
+
+            rest = Rest(**args)
+            db.session.add(rest)
+            db.session.commit()
+
+            return rest
 
 class UsersResource(Resource):
     def get(self, user_id=None):
