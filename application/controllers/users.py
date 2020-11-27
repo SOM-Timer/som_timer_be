@@ -107,6 +107,26 @@ class UserTimerResource(Resource):
             timer = Timer.query.filter_by(user_id=user_id).first()
             return marshal(timer, timer_fields)
 
+    @marshal_with(timer_fields)
+    def put(self, user_id=None):
+        if user_id:
+            timer = Timer.query.filter_by(user_id=user_id).first()
+
+            if 'work_interval' in request.json:
+                timer.work_interval = request.json['work_interval']
+
+            if 'rest_interval' in request.json:
+                timer.rest_interval = request.json['rest_interval']
+
+            if 'sound' in request.json:
+                timer.sound = request.json['sound']
+
+            if 'mood' in request.json:
+                timer.mood = request.json['mood']
+
+            db.session.commit()
+            return timer
+
 class UserRestsResource(Resource):
     def get(self, user_id=None, rest_id=None):
         if user_id:
