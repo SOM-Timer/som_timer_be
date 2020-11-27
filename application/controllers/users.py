@@ -7,9 +7,8 @@ from application import db
 
 user_fields = {
     'id': fields.Integer,
-    'uid': fields.Integer,
     'user_name': fields.String,
-    'token': fields.String
+    'email': fields.String
 }
 
 user_list_fields = {
@@ -43,13 +42,6 @@ rest_list_fields = {
 
 user_post_parser = reqparse.RequestParser()
 user_post_parser.add_argument(
-    'uid',
-    type=int,
-    required=True,
-    location=['json'],
-    help='uid parameter is required'
-)
-user_post_parser.add_argument(
     'user_name',
     type=str,
     required=True,
@@ -57,11 +49,11 @@ user_post_parser.add_argument(
     help='user_name parameter is required'
 )
 user_post_parser.add_argument(
-    'token',
+    'email',
     type=str,
     required=True,
     location=['json'],
-    help='token parameter is required'
+    help='email parameter is required'
 )
 
 timer_post_parser = reqparse.RequestParser()
@@ -88,14 +80,14 @@ timer_post_parser.add_argument(
 )
 timer_post_parser.add_argument(
     'mood',
-    type=str,
+    type=bool,
     required=True,
     location=['json'],
     help='mood parameter is required'
 )
 timer_post_parser.add_argument(
     'user_id',
-    type=str,
+    type=int,
     required=True,
     location=['json'],
     help='user_id parameter is required'
@@ -110,22 +102,30 @@ class UserTimerResource(Resource):
     @marshal_with(timer_fields)
     def put(self, user_id=None):
         if user_id:
-            timer = Timer.query.filter_by(user_id=user_id).first()
+            existing_timer = Timer.query.filter_by(user_id=user_id).first()
+            if existing_timer is None:
+                args = timer_post_parser.parse_args()
+                timer = Timer(**args)
+                db.session.add(timer)
+                db.session.commit()
+                print ("timer created!")
+                return timer
+            else:
+                print ("a timer already exists for that user...lets update it")
+                if 'work_interval' in request.json:
+                    existing_timer.work_interval = request.json['work_interval']
 
-            if 'work_interval' in request.json:
-                timer.work_interval = request.json['work_interval']
+                if 'rest_interval' in request.json:
+                    existing_timer.rest_interval = request.json['rest_interval']
 
-            if 'rest_interval' in request.json:
-                timer.rest_interval = request.json['rest_interval']
+                if 'sound' in request.json:
+                    existing_timer.sound = request.json['sound']
 
-            if 'sound' in request.json:
-                timer.sound = request.json['sound']
+                if 'mood' in request.json:
+                    existing_timer.mood = request.json['mood']
 
-            if 'mood' in request.json:
-                timer.mood = request.json['mood']
-
-            db.session.commit()
-            return timer
+                db.session.commit()
+                return existing_timer
 
 class UserRestsResource(Resource):
     def get(self, user_id=None, rest_id=None):
@@ -186,13 +186,13 @@ class UsersResource(Resource):
     def post(self):
         args = user_post_parser.parse_args()
 
-        existing_user = User.query.filter_by(uid=args.uid).first()
+        existing_user = User.query.filter_by(email=args.email).first()
         if existing_user is None:
             user = User(**args)
             db.session.add(user)
             db.session.commit()
-            print ("user and associated timer created!")
+            print ("user created!")
             return user
         else:
-            print ("a user already exists with that token...")
+            print ("a user already exists with that email...")
             return existing_user
