@@ -6,8 +6,8 @@
   </head>
   <body>
     <h1>Som Timer Endpoints</h1>
-    <div class="get_one_timer">
-      <h3>GET  '/api/timers/{timer_id}'</h3>
+    <div class="get_one_timer_for_user">
+      <h3>GET  '/api/users/:user_id/timer'</h3>
         <p class="sub_header">Response:</p>
         <pre>
           <p class="code_block">
@@ -16,13 +16,15 @@
               "work_interval": "25:00",
               "rest_interval": "5:00"
               "sound": "reverbSplash",
-              "mood": true
+              "mood": true,
+              "user_id": <user_id>
             }
           </p>
         </pre>
     </div>
-    <div class="update_timer">
-      <h3>PUT  '/api/timers/{timer_id}'</h3>
+    <div class="update_create_timer_for_user">
+      <h3>PUT  '/api/users/:user_id/timer'</h3>
+      <p>If a user already has a timer, the settings of that timer will be updated. If not, a new timer with the appropriate settings will be created.</p>
       <p class="sub_header">Request Body:</p>
         <pre>
           <p class="code_block">
@@ -30,7 +32,7 @@
               "work_interval": "30:00",
               "rest_interval": "7:00",
               "sound": "gong",
-              "mood": false
+              "mood": False
             }
           </p>
         </pre>
@@ -42,7 +44,8 @@
               "work_interval": "30:00",
               "rest_interval": "7:00",
               "sound": "gong",
-              "mood": false
+              "mood": false,
+              "user_id": <user_id>
             }
           </p>
         </pre>
@@ -72,8 +75,8 @@
         </pre>
       </div>
 
-      <div class="rests">
-        <h3>GET  '/api/rests'</h3>
+      <div class="rests_for_user">
+        <h3>GET  '/api/users/:user_id/rests'</h3>
         <p class="sub_header">Response:</p>
           <pre>
             <p class="code_block">
@@ -81,30 +84,51 @@
                 count: <number of rests>,
                 rests: [
                 {
-                  id: 1,
-                  mood_rating_1: 3,
-                  mood_rating_2: 5,
-                  content_selected: "MOVEMENT",
-                  focus_interval: "25:00",
-                  rest_interval: "5"
+                  "id": 1,
+                  "mood_rating_1": 3,
+                  "mood_rating_2": 5,
+                  "content_selected": "MOVEMENT",
+                  "focus_interval": "25:00",
+                  "rest_interval": "5",
+                  "user_id": <user_id>
                 },
                 ...]
+              }
             </p>
           </pre>
       </div>
 
-      <div class="create_rest">
-        <h3>POST  '/api/rests'</h3>
+      <div class="single_rest_for_user">
+        <h3>GET  '/api/users/:user_id/rests/:rest_id'</h3>
+        <p>rest_id = 1</p>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                "id": 1,
+                "mood_rating_1": 3,
+                "mood_rating_2": 5,
+                "content_selected": "MOVEMENT",
+                "focus_interval": "25:00",
+                "rest_interval": "5",
+                "user_id": <user_id>
+              }
+            </p>
+          </pre>
+      </div>
+
+      <div class="create_rest_for_user">
+        <h3>POST  '/api/users/:user_id/rests'</h3>
         <p class="sub_header">Request Body:</p>
           <pre>
             <p class="code_block">
               {
-                id: 1,
-                mood_rating_1: 2,
-                mood_rating_2: 5,
-                content_selected: "SOMATIC",
-                focus_interval: "45:00",
-                rest_interval: "10"
+                "mood_rating_1": 2,
+                "mood_rating_2": 5,
+                "content_selected": "SOMATIC",
+                "focus_interval": "45:00",
+                "rest_interval": "10",
+                "user_id": <user_id>
               }
             </p>
           </pre>
@@ -112,12 +136,13 @@
           <pre>
             <p class="code_block">
               {
-                id: 1,
-                mood_rating_1: 2,
-                mood_rating_2: 5,
-                content_selected: "SOMATIC",
-                focus_interval: "45:00",
-                rest_interval: "10"
+                "id": 2,
+                "mood_rating_1": 2,
+                "mood_rating_2": 5,
+                "content_selected": "SOMATIC",
+                "focus_interval": "45:00",
+                "rest_interval": "10",
+                "user_id": <user_id>
               }
             </p>
           </pre>
@@ -132,14 +157,14 @@
                 count: <number of users>,
                 users: [
                 {
-                  id: 1,
-                  user_name: "princess.kopf",
-                  token: "token1"
+                  "id": 1,
+                  "user_name": "Bugs Bunny",
+                  "email": "bb@gmail.com"
                 },
                 {
-                  id: 2,
-                  user_name: "ABD",
-                  token: "token2"
+                  "id": 2,
+                  "user_name": "Taz",
+                  "email": "taz@gmail.com"
                 },
                 ...]
             </p>
@@ -147,15 +172,15 @@
       </div>
 
       <div class="user_by_id">
-        <h3>GET  '/api/users/:id'</h3>
+        <h3>GET  '/api/users/:user_id'</h3>
         <p> id = 1 </p>
         <p class="sub_header">Response:</p>
           <pre>
             <p class="code_block">
               {
-                id: 1,
-                user_name: "princess.kopf",
-                token: "token1"
+                "id": 1,
+                "user_name": "Bugs Bunny",
+                "email": "bb@gmail.com"
               }
             </p>
           </pre>
@@ -163,13 +188,13 @@
 
       <div class="create_user">
         <h3>POST  '/api/users'</h3>
-        <p> ** Will not create a user if that user already exists in the db ** </p>
+        <p> ** Will not create a user if that users email is already in the db ** </p>
         <p class="sub_header">Request Body:</p>
           <pre>
             <p class="code_block">
               {
-                user_name: "princess_peach",
-                token: "token3"
+                "user_name": "Princess Peach",
+                "email": "p.peach@gmail.com"
               }
             </p>
           </pre>
@@ -177,9 +202,9 @@
           <pre>
             <p class="code_block">
               {
-                id: 3,
-                user_name: "princess_peach",
-                token: "token3"
+                "id": 3,
+                "user_name": "Princess Peach",
+                "email": "p.peach@gmail.com"
               }
             </p>
           </pre>

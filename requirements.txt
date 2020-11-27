@@ -11,3 +11,4 @@ flask-testing
 coverage
 gunicorn
 flask_cors
+flask_restplus
