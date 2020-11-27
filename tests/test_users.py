@@ -163,6 +163,30 @@ class TestUsers(unittest.TestCase):
     #     self.assertEquals(payload['mood'], False)
     #     self.assertEquals(payload['user_id'], 1)
 
+    # def test_update_timer_for_user(self): ## WORKS IN POSTMAN
+    #     user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
+    #     timer1 = Timer(work_interval='25:00', rest_interval='5:00', sound='chordCliff', mood=False, user_id=1)
+    #     with self.app.app_context():
+    #             db.session.add(timer1)
+    #             db.session.commit()
+    #
+    #     response = self.test_app.put(
+    #         f'/api/users/{user1.id}/timer',
+    #         json={
+    #             "work_interval": "30:00",
+    #             "mood": True
+    #         },
+    #         follow_redirects=True
+    #     )
+    #
+    #     self.assertEquals(response.status, "200 OK")
+    #     payload = json.loads(response.data)
+    #     self.assertEquals(payload['work_interval'], "30:00")
+    #     self.assertEquals(payload['rest_interval'], '5:00')
+    #     self.assertEquals(payload['sound'], 'chordCliff')
+    #     self.assertEquals(payload['mood'], True)
+    #     self.assertEquals(payload['user_id'], 1)
+
     # def test_get_rests_for_user(self): ## WORKS IN POSTMAN
     #     user1 = User(uid=123456, user_name="Princess.Kopf", token="token1")
     #     rest1 = Rest(mood_rating_1 = 2, mood_rating_2 = 4, rest_interval='5:00', focus_interval='30:00', content_selected='SOMATIC', user_id=user1.id)
