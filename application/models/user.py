@@ -4,14 +4,12 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    uid = db.Column(db.Integer())
     user_name = db.Column(db.String())
-    token = db.Column(db.String())
+    email = db.Column(db.String())
 
-    def __init__(self, uid, user_name, token):
-        self.uid = uid
+    def __init__(self, user_name, email):
         self.user_name = user_name
-        self.token = token
+        self.email = email
 
     def __repr__(self):
         return f"<User {self.id}>"
