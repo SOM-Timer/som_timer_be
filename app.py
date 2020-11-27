@@ -79,7 +79,7 @@ def db_seed():
         db.session.add(x)
 
     # Admin User
-    user = User(uid=123456, user_name='Admin', token='adminToken')
+    user = User(user_name='Admin', email='somtimer@gmail.com')
     db.session.add(user)
 
     ## Timer For Admin
