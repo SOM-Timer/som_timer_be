@@ -98,6 +98,25 @@
           </pre>
       </div>
 
+      <div class="single_rest_for_user">
+        <h3>GET  '/api/users/:user_id/rests/:rest_id'</h3>
+        <p>rest_id = 1</p>
+        <p class="sub_header">Response:</p>
+          <pre>
+            <p class="code_block">
+              {
+                "id": 1,
+                "mood_rating_1": 3,
+                "mood_rating_2": 5,
+                "content_selected": "MOVEMENT",
+                "focus_interval": "25:00",
+                "rest_interval": "5",
+                "user_id": <user_id>
+              }
+            </p>
+          </pre>
+      </div>
+
       <div class="create_rest_for_user">
         <h3>POST  '/api/users/:user_id/rests'</h3>
         <p class="sub_header">Request Body:</p>
